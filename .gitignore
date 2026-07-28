@@ -25,6 +25,7 @@ target/
 *.nar
 *.ear
 !gradle/wrapper/gradle-wrapper.jar
+!apps/backend/gradle/wrapper/gradle-wrapper.jar
 hs_err_pid*
 replay_pid*
 
