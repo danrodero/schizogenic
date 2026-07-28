@@ -1,6 +1,6 @@
 # Engineering competency profile
 
-Last evidence review: No reviewed implementation yet.
+Last evidence review: 2026-07-28 — [PR #4](https://github.com/danrodero/schizogenic/pull/4)
 
 This is an evidence-based planning aid, not a grade. `Not observed` means the
 repository has not supplied evidence; it does not mean the developer lacks the
@@ -21,15 +21,15 @@ skill.
 
 | Area | Rating | Evidence | Practice direction |
 | --- | --- | --- | --- |
-| Java language and standard library | Not observed | — | Establish current Java baseline. |
-| Spring Boot and dependency injection | Not observed | — | Begin with explicit application scaffolding task. |
+| Java language and standard library | Developing | [PR #4](https://github.com/danrodero/schizogenic/pull/4) | Practice Java through behavior with meaningful assertions. |
+| Spring Boot and dependency injection | Developing | [PR #4](https://github.com/danrodero/schizogenic/pull/4) | Reinforce configuration and test boundaries with a real external dependency. |
 | Domain and API design | Not observed | — | Practice translating confirmed behavior into contracts. |
 | PostgreSQL and data integrity | Not observed | — | Start with schema and migration fundamentals when needed. |
-| Automated testing | Not observed | — | Require focused tests from the first code task. |
+| Automated testing | Developing | [PR #4](https://github.com/danrodero/schizogenic/pull/4) | Write tests whose claims precisely match their observable boundary. |
 | TypeScript and React | Not observed | — | Establish baseline after an API capability exists or via an isolated setup task. |
 | CLI design | Not observed | — | Decide language and interface through an ADR first. |
-| Git and pull-request discipline | Not observed | — | Observe first implementation PR. |
-| Documentation and decision records | Not observed | — | Require developer-authored docs for their decisions. |
+| Git and pull-request discipline | Developing | [PR #4](https://github.com/danrodero/schizogenic/pull/4) | Keep PR evidence complete and accurate as scopes become more complex. |
+| Documentation and decision records | Developing | [PR #4](https://github.com/danrodero/schizogenic/pull/4) | State decisions and consequences precisely and keep PR documentation aligned. |
 | Production operations and security | Not observed | — | Introduce proportionately with each boundary. |
 
 ## Calibration rules
