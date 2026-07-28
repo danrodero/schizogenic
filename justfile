@@ -15,6 +15,12 @@ doctor:
 format-nix:
     nixfmt flake.nix
 
+format-java:
+    @git ls-files --cached --others --exclude-standard -z -- "apps/backend/**/*.java" | xargs -0 -r google-java-format --replace
+
+check-java-format:
+    @git ls-files --cached --others --exclude-standard -z -- "apps/backend/**/*.java" | xargs -0 -r google-java-format --dry-run --set-exit-if-changed
+
 check:
     nix flake check "path:$SCHIZOGENIC_ROOT"
     just lint-docs

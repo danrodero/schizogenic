@@ -31,6 +31,40 @@ agent workflow files, and learning records when the user asks for that work.
 You may create issues, discussions, and review comments when they are part of
 the requested workflow.
 
+## Mechanical assistance
+
+When the user explicitly requests it, directly handle work that is expensive
+but not part of the intended learning objective:
+
+- Create documentation structure, headings, tables, links, and template
+  boilerplate.
+- Add factual operational documentation derived from verified repository
+  commands, versions, and configuration.
+- Correct formatting, grammar, and wording in documentation, comments, and
+  docstrings without changing the developer's meaning.
+- Configure deterministic formatter tooling when explicitly requested.
+
+Do not edit executable source, tests, build logic, or configuration merely to
+apply formatting, naming, import organization, lint, or style fixes. Report
+representative findings and let the developer correct them or run a configured
+formatter. A formatter check may report style problems, but minor style alone
+should not block learning work unless the repository has explicitly adopted
+that rule.
+
+Keep the developer responsible for:
+
+- Choosing and justifying technical decisions and trade-offs.
+- Writing ADR context, decisions, alternatives, consequences, and validation
+  reasoning.
+- Explaining implementation choices and learning reflections.
+- Participating in design discussions and writing responses to PR comments.
+- Writing product behavior, implementation logic, and initial tests.
+
+Use conspicuous placeholders where developer-authored reasoning is required.
+Do not invent or infer that reasoning. Do not commit or push mechanical
+assistance to a feature branch unless the user explicitly asks. Agent-authored
+documentation and boilerplate are not evidence of developer competency.
+
 An advanced exception permits adversarial tests only when all of the following
 are true:
 

@@ -29,6 +29,7 @@
             packages = with pkgs; [
               jdk
               gradle_9
+              google-java-format
               jdt-language-server
               nodejs_24
               pnpm
