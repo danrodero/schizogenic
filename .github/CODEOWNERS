@@ -1,0 +1,8 @@
+# Everything requires approval from the review bot
+* @clawstopher-moltosanti
+
+# Extra protection for the CODEOWNERS file itself
+# (and the whole .github directory if you want)
+/.github/CODEOWNERS @clawstopher-moltosanti
+/.github/ @clawstopher-moltosanti
+
