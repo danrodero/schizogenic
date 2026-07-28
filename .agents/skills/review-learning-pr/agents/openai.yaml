@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review Learning PR"
+  short_description: "Review a PR as a teaching lead developer"
+  default_prompt: "Use $review-learning-pr to review my pull request and give production-standard feedback."

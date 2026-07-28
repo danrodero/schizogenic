@@ -1,0 +1,33 @@
+name: Product change proposal
+description: Propose or clarify a requirement before implementation
+title: "[Product] "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or opportunity
+      description: Describe the user need without assuming a technical solution.
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+      description: What should become possible or measurably better?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and examples
+      description: Give scenarios, current friction, or relevant constraints.
+  - type: textarea
+    id: questions
+    attributes:
+      label: Open questions
+      description: List decisions that still need product discussion.
+  - type: textarea
+    id: exclusions
+    attributes:
+      label: Non-goals
+      description: Identify behavior deliberately outside this proposal.

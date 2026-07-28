@@ -1,0 +1,4 @@
+interface:
+  display_name: "Assign Learning Task"
+  short_description: "Choose the next evidence-based coding task"
+  default_prompt: "Use $assign-learning-task to give me an appropriate next development task."
