@@ -20,7 +20,7 @@ check:
     just lint-docs
 
 lint-docs:
-    markdownlint-cli2 "**/*.md" "#.git/**"
+    @git ls-files --cached --others --exclude-standard -z -- "*.md" | xargs -0 -r markdownlint-cli2
 
 db-init:
     @mkdir -p "$PGDATA" "$PGHOST"
