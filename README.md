@@ -100,7 +100,8 @@ configuration.
 3. Implement the task and its tests yourself.
 4. Open a pull request and request review.
 5. Address review findings until the code is production-ready.
-6. The lead agent approves the pull request and records demonstrated growth.
+6. The lead agent records demonstrated growth, approves the pull request,
+   immediately merges it, and delivers final coaching feedback.
 
 Use the pull request and issue templates so acceptance criteria, verification,
 and learning evidence remain visible.

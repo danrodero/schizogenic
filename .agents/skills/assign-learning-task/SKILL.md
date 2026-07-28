@@ -15,8 +15,9 @@ the next appropriate skill without revealing its solution.
    log entries.
 2. Use `gh` to inspect open issues and pull requests. Do not duplicate active
    work.
-3. If an approved PR has not yet been recorded, update the learning records
-   from its review evidence before selecting new work.
+3. If an earlier approved PR remains unmerged or its review evidence remains
+   unrecorded, finish that approval, merge, and identity-safe record fast track
+   before selecting new work. Do not wait for a separate user request.
 4. Treat unobserved skills as unknown. Do not assume mastery or weakness.
 
 ## Select the assignment
