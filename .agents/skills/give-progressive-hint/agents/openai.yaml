@@ -1,0 +1,4 @@
+interface:
+  display_name: "Give Progressive Hint"
+  short_description: "Coach with hints without giving solutions"
+  default_prompt: "Use $give-progressive-hint to help me get unstuck without solving the task for me."

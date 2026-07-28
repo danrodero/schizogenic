@@ -1,0 +1,4 @@
+interface:
+  display_name: "Refine Product Spec"
+  short_description: "Turn product conversations into clear specs"
+  default_prompt: "Use $refine-product-spec to clarify and update the Schizogenic product specification."

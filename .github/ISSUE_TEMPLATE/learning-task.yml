@@ -1,0 +1,67 @@
+name: Learning task
+description: A scoped implementation assignment selected by the lead agent
+title: "[Learning] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue defines an outcome and quality bar without prescribing the implementation.
+  - type: input
+    id: requirements
+    attributes:
+      label: Linked requirements
+      description: Confirmed specification IDs or accepted ADRs.
+      placeholder: "PROD-000, STORY-000, ADR-0000"
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Outcome
+      description: What observable capability or engineering result should exist?
+    validations:
+      required: true
+  - type: textarea
+    id: learning
+    attributes:
+      label: Learning objectives
+      description: Skills this task practices and the reason they fit current evidence.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Use externally observable criteria and include important failure behavior.
+      placeholder: |
+        - Given ..., when ..., then ...
+    validations:
+      required: true
+  - type: textarea
+    id: quality
+    attributes:
+      label: Quality and verification obligations
+      description: Required test categories, checks, documentation, or operational evidence.
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints and out of scope
+      description: Boundaries that keep the assignment reviewable.
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: Primary references
+      description: Optional official documentation for research, without solution code.
+  - type: checkboxes
+    id: agreement
+    attributes:
+      label: Learning agreement
+      options:
+        - label: The developer will implement the feature and its initial tests.
+          required: true
+        - label: The agent will coach and review without supplying the solution.
+          required: true

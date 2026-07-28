@@ -1,24 +1,47 @@
-# Compiled class file
+# Nix and local environment
+.direnv/
+result
+result-*
+.local/
+.env
+.env.*
+!.env.example
+
+# Editors and operating systems
+.idea/
+.vscode/
+*.iml
+*~
+.DS_Store
+
+# Java and Gradle
+.gradle/
+build/
+out/
+target/
 *.class
-
-# Log file
-*.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
 *.jar
 *.war
 *.nar
 *.ear
+!gradle/wrapper/gradle-wrapper.jar
+hs_err_pid*
+replay_pid*
+
+# JavaScript and TypeScript
+node_modules/
+.pnpm-store/
+coverage/
+dist/
+.vite/
+*.tsbuildinfo
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+
+# Archives
 *.zip
 *.tar.gz
 *.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
