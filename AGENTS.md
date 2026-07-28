@@ -23,8 +23,9 @@ implementing the feature yourself would be faster.
 - Do not claim competence without evidence in reviewed code.
 - Do not approve a pull request with unresolved correctness, safety, data
   integrity, architectural, or required-test findings.
-- Do not merge a pull request unless the user explicitly asks; approval and
-  merge are separate actions.
+- Once a pull request is approved, merge it immediately without waiting for a
+  separate user request, unless the user explicitly asks to hold it or GitHub
+  reports a blocking repository condition.
 
 You may edit repository scaffolding, product and engineering documentation,
 agent workflow files, and learning records when the user asks for that work.
@@ -110,6 +111,10 @@ a modular monolith until measured requirements justify something else.
 
 Use `gh` for repository operations when available.
 
+- Before creating or reviewing a pull request, compare the authenticated GitHub
+  identity with the PR author and inspect applicable CODEOWNERS and repository
+  rules. Do not author or open a PR with the identity that must approve it when
+  GitHub would prohibit self-approval.
 - Before assigning work, check open issues and pull requests to avoid
   duplication.
 - Create a learning-task issue for an assignment unless the user asks for a
@@ -119,9 +124,31 @@ Use `gh` for repository operations when available.
 - Put durable findings on the pull request, not only in the chat.
 - Use a change-request review for blocking findings and an approval review only
   when the agreed scope is production-ready.
+- Treat approval as authorization to merge. After submitting an approval,
+  immediately merge, verify the merged commit and linked issue state, and
+  report the result. Do not wait for another request.
 - Never approve merely because CI is green.
 - Never expose tokens, secrets, private environment values, or unrelated local
   changes.
+
+## Policy-change fast track
+
+Agent-authored changes limited to repository policy, agent workflows, or
+learning-process documentation use this identity-safe fast track:
+
+1. The agent makes the requested edits, carefully reviews the complete diff,
+   and runs every relevant validation.
+2. The agent leaves the changes uncommitted when its GitHub identity is the
+   required CODEOWNER or last-push approver.
+3. The developer commits, pushes, and opens the pull request with their own
+   identity.
+4. The agent verifies the exact PR head and checks again, submits the required
+   CODEOWNER approval, immediately merges, and confirms the result.
+
+Fast-track means eliminating redundant waiting, not lowering the review or
+validation bar. If the authenticated identity and repository rules cannot
+produce distinct author and approver identities, stop before creating the PR
+and preserve the edits uncommitted for the developer.
 
 ## Learning records
 
@@ -136,11 +163,17 @@ evidence means "Not observed," not weakness.
 The agent owns these assessments. The developer may correct factual errors but
 must not self-award proficiency.
 
-When possible, append the learning record as a clearly identified,
-agent-authored documentation-only commit at the end of the reviewed PR, then
-re-run required checks before approval. If changing the PR branch is unsafe or
-not permitted, record the evidence at the start of the next task-assignment
-session before choosing new work.
+Prepare the learning record and final coaching feedback immediately when a
+substantive review meets the approval bar. Do not defer them until the next
+task-assignment request.
+
+Prefer including the record at the end of the reviewed PR. When repository
+rules would make an agent commit invalidate or deadlock the required approval,
+leave the agent-authored record changes uncommitted for the developer to
+commit and push. Re-verify that exact head, approve, merge immediately, and
+deliver the feedback as one continuous review lifecycle. If an already-approved
+PR lacks a record, merge it immediately and complete the missing record through
+the policy-change fast track without waiting for the user to request feedback.
 
 ## Repository conventions
 
