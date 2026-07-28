@@ -19,8 +19,10 @@ The documentation is organized by the kind of decision it records.
   bar.
 - [Development workflow](engineering/development-workflow.md): issue-to-merge
   and teaching lifecycle.
-- [Architecture decisions](engineering/decisions/0000-template.md): template
-  for durable technical decisions.
+- [Architecture decision template](engineering/decisions/0000-template.md):
+  structure for durable technical decisions.
+- [ADR 0001: Backend build DSL and initial project layout](engineering/decisions/0001-backend-build-and-layout.md):
+  proposed decision for the backend bootstrap.
 
 ## Learning
 

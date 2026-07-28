@@ -20,13 +20,14 @@ not claim that target.
 | Tool | Pinned version | Purpose |
 | --- | --- | --- |
 | OpenJDK | 25.0.4 | Backend language and runtime |
-| Gradle | 9.5.1 | Bootstrap tool until the project wrapper exists |
+| Gradle | 9.5.1 | Environment diagnostics and project bootstrapping |
 | Node.js | 24.18.0 LTS | Web tooling runtime |
 | pnpm | 11.17.0 | JavaScript package manager |
 | PostgreSQL | 18.4 | Local database server and client |
 
-Spring Boot's exact 4.x version will be chosen in the backend initialization
-assignment. It must be compatible with Java 25 and the selected Gradle wrapper.
+The backend currently pins Spring Boot 4.1.0 and a Gradle 9.5.1 wrapper. Use
+the committed wrapper for backend builds; the Nix-provided Gradle remains
+available for diagnostics and project bootstrapping.
 
 Compatibility references:
 

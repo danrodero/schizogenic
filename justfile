@@ -18,6 +18,7 @@ format-nix:
 check:
     nix flake check "path:$SCHIZOGENIC_ROOT"
     just lint-docs
+    cd apps/backend/ && ./gradlew test
 
 lint-docs:
     @git ls-files --cached --others --exclude-standard -z -- "*.md" | xargs -0 -r markdownlint-cli2
