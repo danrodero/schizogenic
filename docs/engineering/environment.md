@@ -21,6 +21,7 @@ not claim that target.
 | --- | --- | --- |
 | OpenJDK | 25.0.4 | Backend language and runtime |
 | Gradle | 9.5.1 | Environment diagnostics and project bootstrapping |
+| google-java-format | 1.35.0 | Deterministic Java source formatter |
 | Node.js | 24.18.0 LTS | Web tooling runtime |
 | pnpm | 11.17.0 | JavaScript package manager |
 | PostgreSQL | 18.4 | Local database server and client |
@@ -52,6 +53,18 @@ Format the flake and lint documentation:
 just format-nix
 just lint-docs
 ```
+
+Format Java source deterministically, or inspect whether formatting would
+change without modifying files:
+
+```bash
+just format-java
+just check-java-format
+```
+
+Java formatting is advisory during the bootstrap phase and is not part of
+`just check`. Run `just format-java` explicitly when you want it to rewrite
+source files.
 
 Use the database recipes documented in the root README for local PostgreSQL.
 They place data in an ignored `.local` directory and configure trust

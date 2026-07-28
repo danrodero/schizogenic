@@ -19,6 +19,24 @@ Review the developer's work rigorously without taking over its implementation.
    introduced failures.
 4. Never expose secrets or overwrite unrelated local changes.
 
+## Provide requested mechanical assistance
+
+For a pre-PR review, directly apply documentation formatting, grammar,
+navigation, factual documentation boilerplate, and mechanical prose edits to
+comments or docstrings when the user asks. Derive operational text only from
+verified repository commands and configuration.
+
+Do not modify executable source, tests, build logic, or configuration to apply
+formatting, naming, import organization, lint, or style fixes. Report
+representative findings for the developer to correct or address with a
+deterministic formatter.
+
+Leave clear placeholders for the developer to write decisions, alternatives,
+trade-offs, explanations, learning reflections, and PR responses. Do not edit
+feature behavior or initial tests. Keep agent-authored assistance uncommitted
+unless the user explicitly asks otherwise, and exclude it from competency
+evidence.
+
 ## Review order
 
 Review in this priority:
@@ -72,5 +90,5 @@ Once the feature changes meet the approval bar:
 5. If the record cannot safely be committed, defer it to the beginning of the
    next assignment session and say so explicitly.
 
-Do not edit feature code or write replacement tests. Adversarial-test work must
-meet the exception in `AGENTS.md`.
+Do not edit feature code or write replacement tests. Mechanical assistance must
+follow `AGENTS.md`. Adversarial-test work must meet the exception there.

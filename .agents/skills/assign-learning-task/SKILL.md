@@ -49,6 +49,11 @@ Include:
 State what quality must be demonstrated, not how to structure the
 implementation.
 
+State that the agent may handle explicitly requested documentation formatting
+and factual scaffolding. The agent must not format executable code for the
+developer. Keep decision rationale, trade-offs, implementation explanations,
+learning reflections, and PR responses as developer-authored deliverables.
+
 Create a GitHub issue using the learning-task template unless the user asks for
 a conversational draft only. Report the issue link and a concise starting
 point.
