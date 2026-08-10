@@ -14,13 +14,39 @@ Review the developer's work rigorously without taking over its implementation.
    log.
 2. Use `gh pr view`, `gh pr diff`, changed-file context, commit history, and
    check results. Confirm the target and scope before reviewing.
-3. Compare the authenticated GitHub identity with the PR author, CODEOWNERS,
+3. Detect stacked-PR membership. When the pull request is stacked, use
+   `gh stack view --json` (checking out the stack when necessary) to establish
+   its trunk, order, immediate parent, dependent layers, and merge prefix.
+   Review the pull request's layer-relative diff and the cumulative diff from
+   trunk through its exact head.
+4. Compare the authenticated GitHub identity with the PR author, CODEOWNERS,
    and applicable repository rules. Detect a self-approval or last-push
-   deadlock before committing, pushing, or opening another PR.
-4. Run relevant format, static-analysis, build, and test commands in the pinned
+   deadlock for every pull request in a proposed stack merge prefix before
+   committing, pushing, or opening another PR.
+5. Run relevant format, static-analysis, build, and test commands in the pinned
    environment. Record commands and distinguish existing failures from
    introduced failures.
-5. Never expose secrets or overwrite unrelated local changes.
+6. Never expose secrets or overwrite unrelated local changes.
+
+## Review stacked pull requests
+
+- Attribute findings to the lowest layer that introduces them. Do not report a
+  parent-layer defect as if the current layer introduced it, but do block the
+  merge prefix when the cumulative result is unsafe.
+- Treat the ordinary pull request diff as the incremental layer only. Also
+  inspect and verify the cumulative repository state through the selected
+  layer against the stack trunk.
+- Check every pull request from the bottom of the stack through the selected
+  layer: scope, author and approval identity, required review threads, draft
+  state, and required checks must all satisfy the normal production bar.
+- Do not submit final approval for a layer while any pull request in its merge
+  prefix is not production-ready. Once the prefix is ready, approve and merge
+  it atomically with `gh stack merge <pr-number>`; do not use `gh pr merge` on
+  a stacked pull request.
+- After the atomic merge, verify the merged state of every included pull
+  request, the linked issue state, the landed commits, and any dependent layers
+  that remain open. Do not push or rewrite the developer's remaining branches;
+  request a developer-run `gh stack sync` if their local stack needs repair.
 
 ## Review order
 
@@ -60,6 +86,8 @@ required changes from optional coaching.
 - Treat approval as authorization to merge. Immediately merge an approved PR
   without waiting for a separate request, unless the user explicitly requested
   a hold or GitHub reports a blocking repository condition.
+- For a stacked pull request, approval and immediate merge apply to the fully
+  verified prefix through that pull request and must use `gh stack merge`.
 - If an open PR was already approved before the current session, verify that
   the approval still applies to its exact head and merge it immediately.
 

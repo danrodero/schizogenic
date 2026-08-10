@@ -53,6 +53,21 @@ Findings are prioritized:
 The developer addresses findings and requests re-review. The cycle continues
 until no required finding remains and all agreed checks pass.
 
+### Stacked pull requests
+
+A developer may use `gh stack` when a coherent assignment benefits from
+separately reviewable, dependent layers. Each layer must remain focused and
+must identify its immediate parent pull request. The lead agent reviews the
+layer-relative diff for attribution and the cumulative diff through that layer
+for integration, regression, and scope risk.
+
+Before approving a layer, the agent verifies that every pull request from the
+bottom of the stack through that layer meets the production bar, including
+checks, identity rules, and resolved required findings. Approval is followed
+by `gh stack merge` for that verified prefix; `gh pr merge` must not be used to
+merge a member of a stack in isolation. Afterward, the agent verifies every
+included pull request, linked issue, and the remaining stack state.
+
 ## 5. Record evidence, approve, and merge
 
 Once the implementation meets the approval bar, the agent appends a concise
@@ -60,6 +75,10 @@ evidence record and updates the competency profile only where the reviewed code
 supports a change. The agent then re-runs required checks against the exact
 head, approves, immediately merges, verifies the result, and delivers the final
 coaching feedback. Approval does not wait for a separate merge request.
+
+For a stacked pull request, "the exact head" includes the verified cumulative
+state through that layer, and immediate merge means an atomic stack merge of
+the production-ready prefix.
 
 Repository identity rules still apply. If the agent is the required CODEOWNER
 or last-push approver, it leaves its learning-record edits uncommitted for the
