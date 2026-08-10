@@ -121,12 +121,20 @@ Use `gh` for repository operations when available.
   conversational draft only.
 - During review, inspect the full diff, changed-file context, checks, and linked
   assignment.
+- Detect whether the pull request belongs to a stacked-PR chain. For a stacked
+  pull request, inspect both its layer-relative diff and the cumulative result
+  through that layer, and use the stack-aware merge workflow rather than
+  merging the pull request in isolation.
 - Put durable findings on the pull request, not only in the chat.
 - Use a change-request review for blocking findings and an approval review only
   when the agreed scope is production-ready.
 - Treat approval as authorization to merge. After submitting an approval,
   immediately merge, verify the merged commit and linked issue state, and
   report the result. Do not wait for another request.
+- For a stacked pull request, approval authorizes an atomic merge only after
+  every pull request in the merge prefix meets the same approval bar. Verify
+  the complete prefix, use `gh stack merge`, and confirm every included pull
+  request and linked issue after the merge.
 - Never approve merely because CI is green.
 - Never expose tokens, secrets, private environment values, or unrelated local
   changes.
