@@ -119,6 +119,80 @@ This path removes redundant ceremony without relaxing correctness or
 validation. The agent must inspect repository rules and identities before
 creating a PR so it does not author work that only it is allowed to approve.
 
+### Identity-separated fast-track commands
+
+This repository keeps the developer and required reviewer identities separate:
+
+- Dan's `gh` login is stored under
+  `${HOME}/.config/gh-danrodero` and his SSH key is
+  `${HOME}/.ssh/danrodero`.
+- Clawstopher is supplied by the normal `GH_TOKEN` or `GITHUB_TOKEN`
+  environment and remains the default identity for review.
+
+Never unset the bot token without also selecting Dan's isolated
+`GH_CONFIG_DIR`. Verify both identities before publishing:
+
+```bash
+env -u GH_TOKEN -u GITHUB_TOKEN \
+  GH_CONFIG_DIR="${HOME}/.config/gh-danrodero" \
+  gh auth status
+gh auth status
+```
+
+After the agent has prepared and validated a dedicated policy branch, publish
+it as Dan without changing the repository remote or the default reviewer
+configuration:
+
+```bash
+branch="$(git branch --show-current)"
+git -c core.sshCommand="ssh -i ${HOME}/.ssh/danrodero -o IdentitiesOnly=yes" \
+  push -u origin "${branch}"
+env -u GH_TOKEN -u GITHUB_TOKEN \
+  GH_CONFIG_DIR="${HOME}/.config/gh-danrodero" \
+  gh pr create --base main --head "${branch}" --fill
+```
+
+Return to the default Clawstopher identity for the review. Inspect the exact
+head, full diff, author, CODEOWNERS, rules, threads, and checks; re-run the
+relevant local validation. Only then submit the durable approval:
+
+```bash
+pr="<pull-request-number>"
+gh auth status
+gh pr view "${pr}"
+gh pr diff "${pr}"
+gh pr checks "${pr}"
+gh api "repos/danrodero/schizogenic/pulls/${pr}" \
+  --jq '{number, head: .head.sha, stack}'
+gh pr review "${pr}" --approve --body "<exact-head review evidence>"
+```
+
+An absent check suite is acceptable only when repository rules do not require
+checks and the relevant local validation passes. A non-null `stack` value in
+the API output requires the stack merge path below.
+
+Use the merge command that matches verified stack membership:
+
+```bash
+# Ordinary pull request
+gh pr merge "${pr}" --squash
+
+# Stacked pull request: atomically merges the verified prefix through this PR
+gh stack merge "${pr}" --yes --squash
+```
+
+Finally, query the pull request again and fetch `origin/main` to verify the
+merged state and landed commit. For a stack merge, verify every included pull
+request and any remaining dependent layers. Do not use `gh pr merge` for a
+member of a stack.
+
+```bash
+gh pr view "${pr}" --json state,mergedAt,mergeCommit
+git -c core.sshCommand="ssh -i ${HOME}/.ssh/danrodero -o IdentitiesOnly=yes" \
+  fetch origin
+git rev-parse origin/main
+```
+
 ## Tooling problems
 
 If a developer is blocked by Nix, Git, GitHub, or an unrelated environment

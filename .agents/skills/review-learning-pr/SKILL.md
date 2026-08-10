@@ -134,3 +134,38 @@ documentation:
 When preparing this kind of change before a PR exists, edit and validate it but
 leave it uncommitted for the developer if the current GitHub identity must
 approve the eventual PR.
+
+### Execute the identity-separated fast track
+
+For this repository, preserve the default Clawstopher reviewer environment and
+run developer operations through Dan's isolated configuration:
+
+```bash
+env -u GH_TOKEN -u GITHUB_TOKEN \
+  GH_CONFIG_DIR="${HOME}/.config/gh-danrodero" \
+  gh auth status
+gh auth status
+```
+
+Both checks must name the intended, distinct accounts before continuing. Push
+the dedicated policy branch as Dan without rewriting `origin`, then create the
+pull request with Dan's isolated `gh` configuration:
+
+```bash
+branch="$(git branch --show-current)"
+git -c core.sshCommand="ssh -i ${HOME}/.ssh/danrodero -o IdentitiesOnly=yes" \
+  push -u origin "${branch}"
+env -u GH_TOKEN -u GITHUB_TOKEN \
+  GH_CONFIG_DIR="${HOME}/.config/gh-danrodero" \
+  gh pr create --base main --head "${branch}" --fill
+```
+
+Use normal `gh` commands as Clawstopher to re-read the exact remote head, diff,
+reviews, rules, threads, and checks and to re-run relevant local validation.
+Query `repos/danrodero/schizogenic/pulls/<pr>` with `gh api`; a non-null
+`stack` value selects the stack merge path. Submit approval only when no
+required finding remains. Immediately merge an ordinary pull request with
+`gh pr merge <pr> --squash`; merge a stacked pull request with
+`gh stack merge <pr> --yes --squash`. Query GitHub afterward to verify the
+merged commit and all affected pull requests and issues, fetch `origin/main`,
+and compare its exact landed commit.
