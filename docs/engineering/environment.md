@@ -40,15 +40,15 @@ Compatibility references:
 
 Enter and verify the environment:
 
-```bash
-nix develop
+```nu
+nix develop path:. -c nu
 just doctor
 just check
 ```
 
 Format the flake and lint documentation:
 
-```bash
+```nu
 just format-nix
 just lint-docs
 ```

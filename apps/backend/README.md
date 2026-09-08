@@ -20,8 +20,8 @@ authentication, and other application behavior remain outside this scope.
 Enter the repository's Nix development environment before using the commands
 below:
 
-```bash
-nix develop
+```nu
+nix develop path:. -c nu
 ```
 
 ## Build
@@ -29,7 +29,7 @@ nix develop
 From this directory, clean previous outputs, compile the code, run the tests,
 and package the application:
 
-```bash
+```nu
 ./gradlew clean build
 ```
 
@@ -55,7 +55,7 @@ Do not commit passwords or `.env` files.
 
 From the repository root, prepare the local PostgreSQL cluster and database:
 
-```bash
+```nu
 just db-init
 just db-start
 just db-create
@@ -63,7 +63,7 @@ just db-create
 
 Then start the backend:
 
-```bash
+```nu
 cd apps/backend
 ./gradlew bootRun
 ```
@@ -85,7 +85,7 @@ not use Flyway `repair` merely to bypass an unexplained integrity error.
 
 Run the backend tests from a clean state:
 
-```bash
+```nu
 ./gradlew clean test
 ```
 
@@ -110,7 +110,7 @@ The HTML test report is written to `build/reports/tests/test/index.html`.
 
 From the repository root, run the complete repository verification:
 
-```bash
+```nu
 just check
 ```
 

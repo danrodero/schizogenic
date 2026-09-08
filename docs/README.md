@@ -24,7 +24,7 @@ The documentation is organized by the kind of decision it records.
 - [ADR 0001: Backend build DSL and initial project layout](engineering/decisions/0001-backend-build-and-layout.md):
   proposed decision for the backend bootstrap.
 - [ADR 0002: PostgreSQL schema migrations with Flyway](engineering/decisions/0002-postgresql-migrations-with-flyway.md):
-  proposed migration mechanism, integrity policy, and test strategy.
+  accepted migration mechanism, integrity policy, and test strategy.
 
 ## Learning
 

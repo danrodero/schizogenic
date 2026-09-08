@@ -59,10 +59,8 @@ assignment. Until a PR exists and is reviewed, keep completion evidence in a dra
 handoff rather than inventing a PR review or awarding competence.
 
 Inspect authenticated identity, PR author, CODEOWNERS, and active rules before
-publishing or approving. If an agent push would deadlock required approval, leave
-validated changes uncommitted for developer publication. Explain the actual
-external constraint and provide a concrete handoff. Do not assume old credential
-paths are available or change repository protections to force a merge.
+publishing or approving. The configured agent identity can bypass the ruleset for
+agent-authored work, so the agent owns its publication and merge.
 
 After publication, verify the exact PR head and relevant checks. Approve when no
 required defect remains, then immediately merge and verify the landed commit and
@@ -79,13 +77,25 @@ Approve only a ready prefix and merge it atomically with `gh stack merge`, never
 `gh pr merge` for a stack member. Verify every included PR/issue, landed commits,
 and remaining dependencies. Do not rewrite the developer's remaining branches.
 
+## Clean handoffs
+
+Before the developer starts another assignment, agent-owned edits must not remain
+as unexplained working-tree changes. Use a separate branch based on current
+`origin/main`; commit, publish, open, and merge it with the agent identity and
+configured ruleset bypass. Then update `origin/main` and leave the developer on
+a clean task branch.
+
+The documentation branch is not a prerequisite for the next learning PR. The
+agent owns separating or accounting for its changes and inherited commits. Review
+the actual diff against the correct base; do not reject developer work for the
+agent's leftovers, commit grouping, or optional cleanup.
+
 ## Policy-change fast track
 
 The agent may edit policy, workflow, and learning-process documents when asked.
-Review the complete diff and run relevant validation. When the available identity
-is the required approver, leave changes uncommitted for the developer to publish.
-Once the developer opens the PR, verify its exact head, approve, and immediately
-merge. This is a real identity constraint, not another learning exercise.
+Review the complete diff and run relevant validation. The agent commits, pushes,
+opens the PR, verifies its exact head, and merges it using the configured ruleset
+bypass. The developer never publishes agent-authored changes.
 
 For an ordinary PR use `gh pr merge <number> --squash` after approval. For a
 verified stack prefix use `gh stack merge <number> --yes --squash`. Confirm the
@@ -97,5 +107,5 @@ merge command alone.
 Give direct procedural help for environment and repository problems. Explain
 commands and expected results, including when tooling is the lesson. Use the
 pinned Nix environment and committed Gradle wrapper. A machine ownership issue
-with `nix develop` can be avoided using `nix develop path:.`; this does not require
+with `nix develop` can be avoided using `nix develop path:. -c nu`; this does not require
 changing repository ownership or weakening checks.

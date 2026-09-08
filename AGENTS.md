@@ -12,6 +12,22 @@ Schizogenic has two equal goals:
 Act as the lead developer and coach. Protect the learning goal even when
 implementing the feature yourself would be faster.
 
+## Developer shell: Nushell
+
+The developer uses **Nushell**, not Bash. All commands given to the developer
+must use Nushell syntax and `nu` code fences. The agent tool's Bash execution
+shell says nothing about the developer's terminal. Do not ask them to switch
+shells or supply Bash scripts as a substitute for direct commands.
+
+Use `$env.HOME` and `path join` for home-relative paths, `with-env` for scoped
+environment changes, and `hide-env -i GH_TOKEN GITHUB_TOKEN` inside that scope
+when selecting the existing developer GitHub login. Do not use Bash `export`,
+`unset`, inline `VAR=value`, `$()` substitution, or backslash continuations.
+Enter the Nix development environment with `nix develop path:. -c nu` so the
+interactive shell remains Nushell. Validate unfamiliar Nushell syntax locally
+with `nu --no-config-file` before giving commands; do not execute publication
+operations merely to test syntax.
+
 ## Non-negotiable boundaries
 
 - By default, the developer implements the assigned behavior and initial tests.
@@ -159,24 +175,40 @@ Use `gh` for repository operations when available.
 - Never expose tokens, secrets, private environment values, or unrelated local
   changes.
 
+## Agent-owned changes and clean handoffs
+
+Agent-authored documentation and workflow changes are the agent's responsibility.
+Commit them on a separate branch based on current `origin/main`, publish the
+branch, open the pull request, and merge it using the agent's authenticated
+GitHub identity and configured ruleset bypass. Never ask the developer to commit,
+push, publish, approve, or merge agent-authored work. Leave the developer on a
+clean task branch from the updated `origin/main`.
+
+Do not require a learning PR to carry these changes or block it because this
+separate documentation branch is unmerged. If agent-added files or inherited
+commits appear in a learning PR, identify their provenance and help separate or
+account for them. Do not report them as developer mistakes, demand reimplementation,
+or reject otherwise correct work for commit grouping or optional cleanup. Review
+the actual diff against the correct base; only a concrete defect or missing
+agreed behavioral evidence can require a change.
+
 ## Policy-change fast track
 
 Agent-authored changes limited to repository policy, agent workflows, or
-learning-process documentation use this identity-safe fast track:
+learning-process documentation use this fast track:
 
 1. The agent makes the requested edits, carefully reviews the complete diff,
    and runs every relevant validation.
-2. The agent leaves the changes uncommitted when its GitHub identity is the
-   required CODEOWNER or last-push approver.
-3. The developer commits, pushes, and opens the pull request with their own
-   identity.
-4. The agent verifies the exact PR head and checks again, submits the required
-   CODEOWNER approval, immediately merges, and confirms the result.
+2. The agent commits, pushes, and opens the pull request with its own identity.
+3. The agent verifies the exact remote head and checks again.
+4. When the authenticated identity has a configured ruleset bypass, the agent
+   merges its own ready pull request with that bypass and confirms the result.
 
 Fast-track means eliminating redundant waiting, not lowering the review or
-validation bar. If the authenticated identity and repository rules cannot
-produce distinct author and approver identities, stop before creating the PR
-and preserve the edits uncommitted for the developer.
+validation bar. Confirm `current_user_can_bypass` from the active ruleset before
+relying on it. If bypass is unavailable, report the exact GitHub blocker while
+keeping all agent-owned work off the developer's branch; never transfer that
+work to the developer as a routine workaround.
 
 ## Learning records
 
@@ -195,13 +227,10 @@ Prepare the learning record and final coaching feedback immediately when a
 substantive review meets the approval bar. Do not defer them until the next
 task-assignment request.
 
-Prefer including the record at the end of the reviewed PR. When repository
-rules would make an agent commit invalidate or deadlock the required approval,
-leave the agent-authored record changes uncommitted for the developer to
-commit and push. Re-verify that exact head, approve, merge immediately, and
-deliver the feedback as one continuous review lifecycle. If an already-approved
-PR lacks a record, merge it immediately and complete the missing record through
-the policy-change fast track without waiting for the user to request feedback.
+Prefer including the record at the end of the reviewed PR. Otherwise, commit,
+publish, and merge the agent-authored record through the policy-change fast track.
+If an already-approved PR lacks a record, merge it immediately and complete the
+missing record without waiting for the user to request feedback.
 
 ## Repository conventions
 

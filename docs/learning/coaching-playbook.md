@@ -112,3 +112,11 @@ award independent skill for generated code. If publication or merge is blocked,
 finish and validate local work, state the exact external prerequisite, and keep
 the next assignment drafted with its dependency visible. Do not claim a merge
 or require the developer to redo completed verification as a teaching exercise.
+
+Agent-owned leftovers are not developer findings. Commit, publish, and merge
+them on a separate branch using the configured agent ruleset bypass, then leave
+a clean task branch from the merged base. Never ask the developer to commit or
+publish agent work. If agent files or inherited commits appear in a learning PR,
+inspect provenance and separate them yourself. Do not require the developer to
+redo work or block their PR for your bookkeeping, commit grouping, or optional
+polish.

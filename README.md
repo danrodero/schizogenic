@@ -64,8 +64,8 @@ Prerequisites:
 2. Clone the repository.
 3. From the repository root, run:
 
-```bash
-nix develop
+```nu
+nix develop path:. -c nu
 just doctor
 ```
 
@@ -79,9 +79,9 @@ the canonical build command; the shell Gradle is only for bootstrapping it.
 
 ## Local PostgreSQL
 
-Inside `nix develop`:
+Inside the Nix environment opened with `nix develop path:. -c nu`:
 
-```bash
+```nu
 just db-init
 just db-start
 just db-create
