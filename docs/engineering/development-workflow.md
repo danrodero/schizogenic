@@ -97,6 +97,12 @@ Review the complete diff and run relevant validation. The agent commits, pushes,
 opens the PR, verifies its exact head, and merges it using the configured ruleset
 bypass. The developer never publishes agent-authored changes.
 
+Human and agent authentication are separated by operating-system user in the
+Nix development environment. `louie` defaults to the existing `danrodero` gh
+configuration, Dan's Git author, and SSH pushes. `harness` retains the injected
+Clawstopher reviewer credentials. The agent uses its bypass for agent-owned PRs
+and never borrows the developer credentials.
+
 For an ordinary PR use `gh pr merge <number> --squash` after approval. For a
 verified stack prefix use `gh stack merge <number> --yes --squash`. Confirm the
 merged state and linked issue afterward. Never claim completion from an attempted
