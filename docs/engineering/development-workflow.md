@@ -105,6 +105,32 @@ verified stack prefix use `gh stack merge <number> --yes --squash`. Confirm the
 merged state and linked issue afterward. Never claim completion from an attempted
 merge command alone.
 
+## Direct commands and ownership at publication
+
+If the developer must publish prepared changes, the agent supplies a concrete
+handoff in the conversation. It states:
+
+- The developer GitHub login (`danrodero`) and reviewer login
+  (`clawstopher-moltosanti`), with the verified reason they must be separate.
+- The working directory, branch, exact file list, and whether a commit already
+  exists. Already-committed work needs no duplicate commit.
+- Ready-to-run commands for identity verification, explicit-file staging and
+  commit if needed, push, and PR creation. The agent fills in the actual branch,
+  paths, commit message, PR title, and prepared body file. No `git add .` and no
+  unexplained placeholders. A helper is acceptable with a description of what
+  it does and the exact command to run it.
+- Protection against an inherited `GH_TOKEN` or `GITHUB_TOKEN` overriding the
+  developer login. The push and PR creation must use the same verified account.
+- The agent's next action: discover the PR when the developer says "done",
+  verify its exact head and relevant checks, submit the required reviewer
+  approval, immediately merge, and confirm the landed commit and issue state.
+
+Do not merely say "commit the files" or "create a PR". Do not ask the developer
+to approve the PR, locate another reviewer, or request the merge again. Approval
+still requires the agreed scope to be correct; explain a real blocker concretely.
+Publication of agent housekeeping is not a new learning assignment and must not
+contaminate the developer's implementation branch.
+
 ## Tooling failures
 
 Give direct procedural help for environment and repository problems. Explain

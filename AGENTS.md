@@ -196,6 +196,41 @@ validation bar. If the authenticated identity and repository rules cannot
 produce distinct author and approver identities, stop before creating the PR
 and preserve the edits uncommitted for the developer.
 
+## Explicit publication handoff
+
+When GitHub identity rules require the developer to publish agent-prepared work,
+the agent must provide a complete, direct handoff rather than "commit my changes"
+or "open a PR":
+
+1. Name the expected GitHub account (`danrodero` for developer publication) and
+   the agent reviewer (`clawstopher-moltosanti`). Explain the actual identity
+   constraint once. A Git commit author is not the GitHub login used to push or
+   open a PR; verify the latter explicitly.
+2. State the working directory, branch, exact files, and whether changes are
+   already committed. Give the commit hash when available. Do not ask the
+   developer to commit an existing commit again.
+3. Supply ready-to-run commands or a clearly explained helper for identity
+   verification, explicit-path staging and commit when needed, push, and PR
+   creation. Fill in paths, branch names, title, and body; do not leave the user
+   to construct the commands. Avoid `git add .` and preserve unrelated work.
+4. Ensure the publication commands use the verified developer identity even
+   when `GH_TOKEN` or `GITHUB_TOKEN` supplies the reviewer in the environment.
+   An isolated `GH_CONFIG_DIR` with both token overrides removed is suitable.
+   Stop before publishing if the login is wrong; never print credentials.
+5. Prepare the PR title and body yourself, including verification results and
+   agent contributions. Say explicitly which commands the developer must run
+   and what the agent will do afterward. A helper must explain its actions.
+6. Once the developer says "done" or provides a PR, find it yourself, verify
+   the exact head, author, checks, rules, and findings, then submit the required
+   approval from the agent reviewer account and immediately merge when ready.
+   Do not ask the developer to approve the PR, arrange another reviewer, or
+   repeat the merge request. Real blocking conditions must be explained precisely.
+
+This is repository mechanics, so always give direct commands. Agent-owned
+housekeeping must not become an implementation exercise or a review finding
+against the developer. Apply the clean-handoff exception above when they need
+an uncontaminated branch for their next task.
+
 ## Learning records
 
 `docs/learning/review-log.md` is append-only evidence. Record an entry only

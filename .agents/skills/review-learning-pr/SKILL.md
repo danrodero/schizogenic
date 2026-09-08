@@ -161,6 +161,23 @@ When preparing this kind of change before a PR exists, edit and validate it but
 leave it uncommitted for the developer if the current GitHub identity must
 approve the eventual PR.
 
+### Give a complete publication handoff
+
+Follow `AGENTS.md`'s explicit publication handoff. Before asking the developer to
+act, list the working directory, branch, exact files, and committed/uncommitted
+state. Supply direct, filled-in commands for checking the `danrodero` login,
+staging only the named files and committing if needed, pushing, and creating the
+PR with the agent-prepared title/body. Existing local commits need publication,
+not another commit. A single helper is acceptable if its actions are explained.
+Prevent inherited reviewer tokens from silently selecting the wrong account.
+
+Tell the developer: "Run these publication commands with your developer account;
+I will verify the resulting PR, submit the reviewer approval, and merge it."
+When they say "done", discover the PR without demanding a URL. Review its exact
+head and submit approval yourself from the required reviewer account when the
+agreed scope is ready, then merge immediately. Do not send the developer away to
+find an approver or make them request approval/merge separately.
+
 ### Identity availability
 
 Use only available, authorized GitHub identities. Historical account paths or
