@@ -59,10 +59,8 @@ assignment. Until a PR exists and is reviewed, keep completion evidence in a dra
 handoff rather than inventing a PR review or awarding competence.
 
 Inspect authenticated identity, PR author, CODEOWNERS, and active rules before
-publishing or approving. If an agent push would deadlock required approval, leave
-validated changes uncommitted for developer publication. Explain the actual
-external constraint and provide a concrete handoff. Do not assume old credential
-paths are available or change repository protections to force a merge.
+publishing or approving. The configured agent identity can bypass the ruleset for
+agent-authored work, so the agent owns its publication and merge.
 
 After publication, verify the exact PR head and relevant checks. Approve when no
 required defect remains, then immediately merge and verify the landed commit and
@@ -82,10 +80,10 @@ and remaining dependencies. Do not rewrite the developer's remaining branches.
 ## Clean handoffs
 
 Before the developer starts another assignment, agent-owned edits must not remain
-as unexplained working-tree changes. When asked to commit them, use a separate
-local documentation branch based on current `origin/main` and the agent's commit
-identity; leave the developer on a clean task branch. This overrides the default
-uncommitted-record procedure. Publishing still requires valid GitHub identities.
+as unexplained working-tree changes. Use a separate branch based on current
+`origin/main`; commit, publish, open, and merge it with the agent identity and
+configured ruleset bypass. Then update `origin/main` and leave the developer on
+a clean task branch.
 
 The documentation branch is not a prerequisite for the next learning PR. The
 agent owns separating or accounting for its changes and inherited commits. Review
@@ -95,71 +93,14 @@ agent's leftovers, commit grouping, or optional cleanup.
 ## Policy-change fast track
 
 The agent may edit policy, workflow, and learning-process documents when asked.
-Review the complete diff and run relevant validation. When the available identity
-is the required approver, leave changes uncommitted for the developer to publish.
-Once the developer opens the PR, verify its exact head, approve, and immediately
-merge. This is a real identity constraint, not another learning exercise.
+Review the complete diff and run relevant validation. The agent commits, pushes,
+opens the PR, verifies its exact head, and merges it using the configured ruleset
+bypass. The developer never publishes agent-authored changes.
 
 For an ordinary PR use `gh pr merge <number> --squash` after approval. For a
 verified stack prefix use `gh stack merge <number> --yes --squash`. Confirm the
 merged state and linked issue afterward. Never claim completion from an attempted
 merge command alone.
-
-## Direct commands and ownership at publication
-
-If the developer must publish prepared changes, the agent supplies a concrete
-handoff in the conversation. It states:
-
-- The developer GitHub login (`danrodero`) and reviewer login
-  (`clawstopher-moltosanti`), with the verified reason they must be separate.
-- The working directory, branch, exact file list, and whether a commit already
-  exists. Already-committed work needs no duplicate commit.
-- Ready-to-run commands for identity verification, explicit-file staging and
-  commit if needed, push, and PR creation. The agent fills in the actual branch,
-  paths, commit message, PR title, and prepared body file. No `git add .` and no
-  unexplained placeholders. A helper is acceptable with a description of what
-  it does and the exact command to run it.
-- Protection against an inherited `GH_TOKEN` or `GITHUB_TOKEN` overriding the
-  developer login. The push and PR creation must use the same verified account.
-- The agent's next action: discover the PR when the developer says "done",
-  verify its exact head and relevant checks, submit the required reviewer
-  approval, immediately merge, and confirm the landed commit and issue state.
-
-Do not merely say "commit the files" or "create a PR". Do not ask the developer
-to approve the PR, locate another reviewer, or request the merge again. Approval
-still requires the agreed scope to be correct; explain a real blocker concretely.
-Publication of agent housekeeping is not a new learning assignment and must not
-contaminate the developer's implementation branch.
-
-## Previously used developer login
-
-PR #10 documented a successful existing setup: the developer's `gh` login is
-under `~/.config/gh-danrodero`, and Git publication used the existing SSH key
-`~/.ssh/danrodero`. The default environment supplies the reviewer token.
-Reuse this documented setup before proposing a new login or configuration directory.
-
-The developer uses **Nushell**. Run this in their own terminal to verify the
-existing login without changing the parent environment:
-
-```nu
-with-env {GH_CONFIG_DIR: ($env.HOME | path join ".config" "gh-danrodero")} {
-    hide-env -i GH_TOKEN GITHUB_TOKEN
-    gh auth status
-}
-```
-
-The account must be `danrodero`. Put the actual `gh pr create` command inside
-the same `with-env` scope after hiding token overrides. Git pushes use the
-existing SSH setup independently. Supply the actual branch and prepared PR body
-in each handoff. Use Nushell syntax throughout, not Bash scripts or continuations.
-
-`$env.HOME` belongs to the process account. An agent running as `harness` checks
-`/home/harness`, not the human's home directory. Missing configuration there does
-not establish that the developer needs to authenticate again. If the agent
-cannot access the developer's configuration, say so and provide the existing
-command for their terminal. Do not read token files or search for alternate keys.
-
-Historical evidence: [PR #10](https://github.com/danrodero/schizogenic/pull/10).
 
 ## Tooling failures
 

@@ -113,15 +113,13 @@ Once the feature changes meet the approval bar:
    evidence.
 3. Prepare these changes immediately; never defer them until the developer asks
    for feedback or requests another assignment.
-4. Prefer including the records at the end of the reviewed PR. If the agent is
-   the required CODEOWNER or last-push approver, leave its record changes
-   uncommitted for the developer to commit and push so self-approval rules are
-   not deadlocked.
+4. Prefer including the records at the end of the reviewed PR. Otherwise,
+   commit and publish them through the agent fast track.
 5. Re-run required checks against the exact head, submit the final approval,
    merge immediately, and deliver the review feedback.
 6. If an already-approved PR must be merged before missing records can be
    added, merge it first, then immediately prepare and complete an
-   identity-safe fast-track PR for those records.
+   agent fast-track PR for those records.
 
 By default leave implementation and initial tests to the developer while giving
 concrete instruction. An explicit request to take over permits scoped completion
@@ -130,11 +128,10 @@ work must meet the exception in `AGENTS.md`.
 
 ## Own the agent's changes
 
-Apply `AGENTS.md`'s clean-handoff exception before the uncommitted guidance below.
-When asked to commit agent-owned records or clear the workspace, commit locally
-with the agent identity on a separate documentation branch from `origin/main`.
-Leave a clean implementation branch for the developer. GitHub publication and
-approval constraints still apply; do not open a self-approval deadlock.
+Commit agent-owned records on a separate documentation branch from `origin/main`,
+publish them, open the PR, and merge with the configured agent ruleset bypass.
+Leave a clean implementation branch for the developer. Never transfer this work
+to the developer for publication.
 
 Do not block a learning PR because agent-owned documentation remains unmerged,
 agent edits are present, or inherited commits make the commit list look broad.
@@ -148,59 +145,11 @@ organization or optional cleanup.
 For a PR limited to repository policy, agent workflows, or learning-process
 documentation:
 
-1. Confirm that the developer, not the required CODEOWNER identity, authored
-   the PR.
+1. Confirm the authenticated agent identity has ruleset bypass permission.
 2. Inspect the complete diff and verify the exact head with every relevant
    documentation and skill validation.
-3. Request changes for any defect; fast-track does not waive the production
+3. Commit, push, and open the PR with the agent identity.
+4. Re-read the remote diff and checks. Fast-track does not waive the production
    bar.
-4. If the change is correct, submit the CODEOWNER approval and merge
-   immediately in the same session.
-
-When preparing this kind of change before a PR exists, edit and validate it but
-leave it uncommitted for the developer if the current GitHub identity must
-approve the eventual PR.
-
-### Give a complete publication handoff
-
-The developer uses Nushell. Follow the shell section in `AGENTS.md`: direct
-Nushell commands, `with-env`/`hide-env` for scoped authentication, and no Bash
-scripts, `export`, `unset`, inline assignments, or backslash continuations.
-The agent execution shell is not evidence of the user's shell.
-
-Follow `AGENTS.md`'s explicit publication handoff. Before asking the developer to
-act, list the working directory, branch, exact files, and committed/uncommitted
-state. Supply direct, filled-in commands for checking the `danrodero` login,
-staging only the named files and committing if needed, pushing, and creating the
-PR with the agent-prepared title/body. Existing local commits need publication,
-not another commit. A single helper is acceptable if its actions are explained.
-Prevent inherited reviewer tokens from silently selecting the wrong account.
-
-Tell the developer: "Run these publication commands with your developer account;
-I will verify the resulting PR, submit the reviewer approval, and merge it."
-When they say "done", discover the PR without demanding a URL. Review its exact
-head and submit approval yourself from the required reviewer account when the
-agreed scope is ready, then merge immediately. Do not send the developer away to
-find an approver or make them request approval/merge separately.
-
-### Identity availability
-
-Before proposing fresh authentication, read the "Previously used developer login"
-section in `docs/engineering/development-workflow.md`. PR #10 documents
-`~/.config/gh-danrodero` with reviewer token overrides removed. A missing login
-in the harness account does not prove it is missing in the developer's account.
-Reuse that existing developer-terminal command when agent access is unavailable.
-
-Use only available, authorized GitHub identities. Historical account paths or
-keys in old instructions are not evidence that a developer login exists here.
-Inspect `gh api user`, CODEOWNERS, and active rules before publishing. If the
-available account is the sole required approver, prepare and validate the changes
-but leave them uncommitted for developer publication. Explain the exact GitHub
-constraint once, with a short ready-to-run handoff. Never change protections,
-forge authorship, or search for alternate credentials to force a merge.
-
-After developer publication, verify the exact remote head, author, diff, rules,
-review threads and checks. Query the pull request API's `stack` field. For an
-ordinary PR, approve then `gh pr merge <number> --squash`; for a stack, verify the
-entire prefix and use `gh stack merge <number> --yes --squash`. Verify merged
-state, landed commit, linked issues, and dependent layers afterward.
+5. If the change is correct, merge immediately using the configured bypass and
+   verify the landed commit.

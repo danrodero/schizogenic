@@ -178,12 +178,11 @@ Use `gh` for repository operations when available.
 ## Agent-owned changes and clean handoffs
 
 Agent-authored documentation and workflow changes are the agent's responsibility.
-When the developer asks to commit them or needs a clean workspace for the next
-assignment, commit them locally on a separate documentation branch based on
-current `origin/main`, using the agent's own commit identity. Leave the developer
-on a clean task branch from `origin/main`. This is an explicit exception to the
-uncommitted-record guidance below; local commits do not authorize publication
-under an identity that cannot satisfy GitHub review rules.
+Commit them on a separate branch based on current `origin/main`, publish the
+branch, open the pull request, and merge it using the agent's authenticated
+GitHub identity and configured ruleset bypass. Never ask the developer to commit,
+push, publish, approve, or merge agent-authored work. Leave the developer on a
+clean task branch from the updated `origin/main`.
 
 Do not require a learning PR to carry these changes or block it because this
 separate documentation branch is unmerged. If agent-added files or inherited
@@ -196,56 +195,20 @@ agreed behavioral evidence can require a change.
 ## Policy-change fast track
 
 Agent-authored changes limited to repository policy, agent workflows, or
-learning-process documentation use this identity-safe fast track:
+learning-process documentation use this fast track:
 
 1. The agent makes the requested edits, carefully reviews the complete diff,
    and runs every relevant validation.
-2. The agent leaves the changes uncommitted when its GitHub identity is the
-   required CODEOWNER or last-push approver.
-3. The developer commits, pushes, and opens the pull request with their own
-   identity.
-4. The agent verifies the exact PR head and checks again, submits the required
-   CODEOWNER approval, immediately merges, and confirms the result.
+2. The agent commits, pushes, and opens the pull request with its own identity.
+3. The agent verifies the exact remote head and checks again.
+4. When the authenticated identity has a configured ruleset bypass, the agent
+   merges its own ready pull request with that bypass and confirms the result.
 
 Fast-track means eliminating redundant waiting, not lowering the review or
-validation bar. If the authenticated identity and repository rules cannot
-produce distinct author and approver identities, stop before creating the PR
-and preserve the edits uncommitted for the developer.
-
-## Explicit publication handoff
-
-When GitHub identity rules require the developer to publish agent-prepared work,
-the agent must provide a complete, direct handoff rather than "commit my changes"
-or "open a PR":
-
-1. Name the expected GitHub account (`danrodero` for developer publication) and
-   the agent reviewer (`clawstopher-moltosanti`). Explain the actual identity
-   constraint once. A Git commit author is not the GitHub login used to push or
-   open a PR; verify the latter explicitly.
-2. State the working directory, branch, exact files, and whether changes are
-   already committed. Give the commit hash when available. Do not ask the
-   developer to commit an existing commit again.
-3. Supply ready-to-run commands or a clearly explained helper for identity
-   verification, explicit-path staging and commit when needed, push, and PR
-   creation. Fill in paths, branch names, title, and body; do not leave the user
-   to construct the commands. Avoid `git add .` and preserve unrelated work.
-4. Ensure the publication commands use the verified developer identity even
-   when `GH_TOKEN` or `GITHUB_TOKEN` supplies the reviewer in the environment.
-   An isolated `GH_CONFIG_DIR` with both token overrides removed is suitable.
-   Stop before publishing if the login is wrong; never print credentials.
-5. Prepare the PR title and body yourself, including verification results and
-   agent contributions. Say explicitly which commands the developer must run
-   and what the agent will do afterward. A helper must explain its actions.
-6. Once the developer says "done" or provides a PR, find it yourself, verify
-   the exact head, author, checks, rules, and findings, then submit the required
-   approval from the agent reviewer account and immediately merge when ready.
-   Do not ask the developer to approve the PR, arrange another reviewer, or
-   repeat the merge request. Real blocking conditions must be explained precisely.
-
-This is repository mechanics, so always give direct commands. Agent-owned
-housekeeping must not become an implementation exercise or a review finding
-against the developer. Apply the clean-handoff exception above when they need
-an uncontaminated branch for their next task.
+validation bar. Confirm `current_user_can_bypass` from the active ruleset before
+relying on it. If bypass is unavailable, report the exact GitHub blocker while
+keeping all agent-owned work off the developer's branch; never transfer that
+work to the developer as a routine workaround.
 
 ## Learning records
 
@@ -264,13 +227,10 @@ Prepare the learning record and final coaching feedback immediately when a
 substantive review meets the approval bar. Do not defer them until the next
 task-assignment request.
 
-Prefer including the record at the end of the reviewed PR. When repository
-rules would make an agent commit invalidate or deadlock the required approval,
-leave the agent-authored record changes uncommitted for the developer to
-commit and push. Re-verify that exact head, approve, merge immediately, and
-deliver the feedback as one continuous review lifecycle. If an already-approved
-PR lacks a record, merge it immediately and complete the missing record through
-the policy-change fast track without waiting for the user to request feedback.
+Prefer including the record at the end of the reviewed PR. Otherwise, commit,
+publish, and merge the agent-authored record through the policy-change fast track.
+If an already-approved PR lacks a record, merge it immediately and complete the
+missing record without waiting for the user to request feedback.
 
 ## Repository conventions
 
