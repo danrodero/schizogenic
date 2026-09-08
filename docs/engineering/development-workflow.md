@@ -134,23 +134,26 @@ contaminate the developer's implementation branch.
 ## Previously used developer login
 
 PR #10 documented a successful existing setup: the developer's `gh` login is
-under `$HOME/.config/gh-danrodero`, and Git publication used the existing SSH key
-`$HOME/.ssh/danrodero`. The default environment supplies the reviewer token.
+under `~/.config/gh-danrodero`, and Git publication used the existing SSH key
+`~/.ssh/danrodero`. The default environment supplies the reviewer token.
 Reuse this documented setup before proposing a new login or configuration directory.
 
-Run this in the developer's own terminal to verify the existing login:
+The developer uses **Nushell**. Run this in their own terminal to verify the
+existing login without changing the parent environment:
 
-```bash
-env -u GH_TOKEN -u GITHUB_TOKEN \
-  GH_CONFIG_DIR="$HOME/.config/gh-danrodero" \
-  gh auth status
+```nu
+with-env {GH_CONFIG_DIR: ($env.HOME | path join ".config" "gh-danrodero")} {
+    hide-env -i GH_TOKEN GITHUB_TOKEN
+    gh auth status
+}
 ```
 
-The account must be `danrodero`. Use the same environment prefix for `gh pr
-create`; Git pushes can use the existing SSH setup independently. Give the
-actual branch and prepared PR body in each publication handoff.
+The account must be `danrodero`. Put the actual `gh pr create` command inside
+the same `with-env` scope after hiding token overrides. Git pushes use the
+existing SSH setup independently. Supply the actual branch and prepared PR body
+in each handoff. Use Nushell syntax throughout, not Bash scripts or continuations.
 
-`$HOME` belongs to the process account. An agent running as `harness` checks
+`$env.HOME` belongs to the process account. An agent running as `harness` checks
 `/home/harness`, not the human's home directory. Missing configuration there does
 not establish that the developer needs to authenticate again. If the agent
 cannot access the developer's configuration, say so and provide the existing
@@ -163,5 +166,5 @@ Historical evidence: [PR #10](https://github.com/danrodero/schizogenic/pull/10).
 Give direct procedural help for environment and repository problems. Explain
 commands and expected results, including when tooling is the lesson. Use the
 pinned Nix environment and committed Gradle wrapper. A machine ownership issue
-with `nix develop` can be avoided using `nix develop path:.`; this does not require
+with `nix develop` can be avoided using `nix develop path:. -c nu`; this does not require
 changing repository ownership or weakening checks.

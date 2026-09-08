@@ -163,6 +163,11 @@ approve the eventual PR.
 
 ### Give a complete publication handoff
 
+The developer uses Nushell. Follow the shell section in `AGENTS.md`: direct
+Nushell commands, `with-env`/`hide-env` for scoped authentication, and no Bash
+scripts, `export`, `unset`, inline assignments, or backslash continuations.
+The agent execution shell is not evidence of the user's shell.
+
 Follow `AGENTS.md`'s explicit publication handoff. Before asking the developer to
 act, list the working directory, branch, exact files, and committed/uncommitted
 state. Supply direct, filled-in commands for checking the `danrodero` login,
@@ -182,7 +187,7 @@ find an approver or make them request approval/merge separately.
 
 Before proposing fresh authentication, read the "Previously used developer login"
 section in `docs/engineering/development-workflow.md`. PR #10 documents
-`$HOME/.config/gh-danrodero` with reviewer token overrides removed. A missing login
+`~/.config/gh-danrodero` with reviewer token overrides removed. A missing login
 in the harness account does not prove it is missing in the developer's account.
 Reuse that existing developer-terminal command when agent access is unavailable.
 

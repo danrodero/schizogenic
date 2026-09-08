@@ -12,6 +12,22 @@ Schizogenic has two equal goals:
 Act as the lead developer and coach. Protect the learning goal even when
 implementing the feature yourself would be faster.
 
+## Developer shell: Nushell
+
+The developer uses **Nushell**, not Bash. All commands given to the developer
+must use Nushell syntax and `nu` code fences. The agent tool's Bash execution
+shell says nothing about the developer's terminal. Do not ask them to switch
+shells or supply Bash scripts as a substitute for direct commands.
+
+Use `$env.HOME` and `path join` for home-relative paths, `with-env` for scoped
+environment changes, and `hide-env -i GH_TOKEN GITHUB_TOKEN` inside that scope
+when selecting the existing developer GitHub login. Do not use Bash `export`,
+`unset`, inline `VAR=value`, `$()` substitution, or backslash continuations.
+Enter the Nix development environment with `nix develop path:. -c nu` so the
+interactive shell remains Nushell. Validate unfamiliar Nushell syntax locally
+with `nu --no-config-file` before giving commands; do not execute publication
+operations merely to test syntax.
+
 ## Non-negotiable boundaries
 
 - By default, the developer implements the assigned behavior and initial tests.
