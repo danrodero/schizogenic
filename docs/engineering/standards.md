@@ -8,7 +8,7 @@ parts relevant to each assignment.
 A change is done when:
 
 - Its acceptance criteria and relevant edge cases are met.
-- The developer can explain the design and trade-offs.
+- The design is understandable; unfamiliar trade-offs receive coaching.
 - Automated tests cover the behavior at appropriate boundaries.
 - Required format, static analysis, build, and test commands pass from a clean
   checkout.
@@ -68,7 +68,8 @@ A change is done when:
 
 ## Testing
 
-- The developer writes the initial tests for every behavior.
+- The developer normally writes the initial tests for assigned behavior. An
+  explicit request for agent completion permits assisted tests; record authorship.
 - Prefer fast unit tests for isolated policy and fewer integration or
   end-to-end tests for important boundaries and journeys.
 - Keep tests deterministic, independent, and readable.

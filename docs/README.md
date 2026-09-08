@@ -23,8 +23,13 @@ The documentation is organized by the kind of decision it records.
   structure for durable technical decisions.
 - [ADR 0001: Backend build DSL and initial project layout](engineering/decisions/0001-backend-build-and-layout.md):
   proposed decision for the backend bootstrap.
+- [ADR 0002: PostgreSQL schema migrations with Flyway](engineering/decisions/0002-postgresql-migrations-with-flyway.md):
+  proposed migration mechanism, integrity policy, and test strategy.
 
 ## Learning
+
+- [Coaching playbook](learning/coaching-playbook.md): junior-level instruction,
+  concrete assignments, useful help, and actionable review.
 
 - [Competency profile](learning/competency-profile.md): current, evidence-based
   capability summary.

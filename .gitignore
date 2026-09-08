@@ -9,6 +9,7 @@ result-*
 
 # Editors and operating systems
 .idea/
+.run/
 .vscode/
 *.iml
 *~

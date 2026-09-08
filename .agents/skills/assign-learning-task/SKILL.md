@@ -5,61 +5,51 @@ description: Select and write the next Schizogenic implementation assignment fro
 
 # Assign Learning Task
 
-Choose one production-relevant task that is achievable with effort and teaches
-the next appropriate skill without revealing its solution.
+Read `AGENTS.md`, `docs/README.md`, and
+`docs/learning/coaching-playbook.md`. Apply its assignment format and preflight;
+this skill must produce an issue a junior programmer can start without guessing.
 
 ## Gather evidence
 
-1. Read `AGENTS.md`, confirmed product requirements, accepted ADRs,
-   `docs/engineering/standards.md`, the competency profile, and recent review
-   log entries.
-2. Use `gh` to inspect open issues and pull requests. Do not duplicate active
-   work.
-3. If an earlier approved PR remains unmerged or its review evidence remains
-   unrecorded, finish that approval, merge, and identity-safe record fast track
-   before selecting new work. Do not wait for a separate user request.
-4. Treat unobserved skills as unknown. Do not assume mastery or weakness.
+1. Read confirmed product requirements, relevant accepted ADRs, engineering
+   standards, the competency profile, and recent review-log entries.
+2. Inspect current code, open issues, and PRs with `gh`. Avoid duplicate work.
+3. Finish a prior ready review/merge and its evidence record first when possible.
+   If an external identity/check blocks it, prepare a clearly dependent next
+   assignment; do not pretend the prerequisite merged or stall all local work.
+4. Treat unobserved skills as unknown. Agent-completed work is not independent
+   developer evidence. Calibrate to junior level unless reviewed evidence shows
+   readiness for a larger step.
 
-## Select the assignment
+## Select and teach
 
-Prefer a task that:
+Choose one small confirmed behavior or necessary engineering foundation. Introduce
+at most one main new concept; reuse existing tooling and test infrastructure.
+Do not assign a complete vertical module or another infrastructure project just
+because product questions are unresolved. A small test-focused task is valid.
 
-- Advances a confirmed requirement or necessary engineering foundation.
-- Produces one coherent, reviewable outcome.
-- Reinforces one developing skill and introduces at most one major new concept.
-- Requires the developer to write meaningful initial tests.
-- Fits the current architecture and avoids speculative infrastructure.
+Write a short prerequisite lesson. Define unfamiliar terms, explain why the
+concept matters, and show a small example where helpful. Provide file paths,
+relevant API names, ordered steps, and a concrete first action. These are allowed
+teaching aids. Leave meaningful work for the developer; do not include the whole
+implementation unless explicitly asked to complete it.
 
-For a new developer with no evidence, begin with a small setup or behavior
-slice that reveals fundamentals. Do not assign a complete vertical product
-module as the first task.
+## Publish a bounded contract
 
-## Write the assignment
+Use `.github/ISSUE_TEMPLATE/learning-task.yml` sections: requirements, outcome,
+learning/prerequisites, starting point and steps, acceptance examples,
+verification, boundaries/submission, and focused primary references.
 
-Include:
+- Give exact input/output examples and relevant failure behavior.
+- Name each required test scenario and exact commands with working directories.
+- Distinguish requirements from suggestions and optional stretch work.
+- State required runtime prerequisites; check that restrictions do not conflict
+  with the test strategy.
+- Avoid unexplained demands such as "safe repeatability" or "production-ready".
+- Keep PR reporting short: what changed, tests run/results, and remaining doubts.
 
-- Linked requirement IDs and relevant context.
-- An observable outcome.
-- One or two learning objectives and why they fit the evidence.
-- Acceptance criteria, including important failure behavior.
-- Test, documentation, and verification obligations.
-- Constraints and explicit non-goals.
-- Expected deliverables and PR instructions.
-- Optional links to primary documentation for research.
-
-State what quality must be demonstrated, not how to structure the
-implementation.
-
-Create a GitHub issue using the learning-task template unless the user asks for
-a conversational draft only. Report the issue link and a concise starting
-point.
-
-## Guardrails
-
-- Do not supply code, pseudocode, file-by-file steps, class names, schemas, or a
-  hidden reference solution.
-- Do not make an assignment from a merely proposed requirement.
-- Do not use unexplained complexity as a difficulty mechanism.
-- Do not bundle cleanup, product behavior, and infrastructure into one task.
-- Do not test several new skill domains at once.
-- Do not update competency ratings merely because a task was assigned.
+Run the playbook preflight before creating the issue. Create a GitHub issue
+unless the user requested only a draft. If a prerequisite cannot merge yet,
+label the dependency explicitly and present the assignment as queued, not ready.
+Report the link and a useful first action. Do not change competency ratings for
+an assignment or silently promote proposed product requirements.

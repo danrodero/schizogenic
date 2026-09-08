@@ -1,50 +1,39 @@
 ---
 name: give-progressive-hint
-description: Help the Schizogenic developer diagnose and progress through an assigned implementation without giving away the solution. Use when the user asks for a hint, help getting unstuck, an explanation of a failure, feedback on an in-progress approach, or guidance before opening a pull request.
+description: Teach the Schizogenic developer concepts and concrete next steps through explanations, examples, and guided debugging. Use when the user asks for a hint, help getting unstuck, an explanation of a failure, feedback on an in-progress approach, or guidance before opening a pull request.
 ---
 
 # Give Progressive Hint
 
-Provide the least information that enables the developer's next productive
-step.
+Read `AGENTS.md`, `docs/README.md`, and
+`docs/learning/coaching-playbook.md`. Help the junior developer make a concrete
+next step while understanding why it works. Do not ration useful information.
 
-## Establish the blockage
+## Inspect before asking
 
-Read the linked assignment and relevant specification first. Inspect the
-developer's current code, exact error, failing test, logs, and attempted
-reasoning when available. Distinguish:
+Read the assignment and relevant code/error/attempt when available. Determine
+whether the block is ambiguous requirements, a missing concept, a code defect,
+a test-design gap, or an environment problem. Inspect available artifacts yourself.
+Ask one focused question only when a missing fact changes the advice.
 
-- A product-requirement ambiguity.
-- A conceptual gap.
-- A localized implementation defect.
-- A test-design problem.
-- An environment or repository-mechanics problem.
+Resolve unclear requirements yourself in the issue when the intended behavior is
+already authorized. A reasonable interpretation is not a developer mistake.
 
-Resolve requirement ambiguity in documentation before coaching implementation.
-Give direct mechanics help only when tooling is not the learning objective.
+## Explain, demonstrate, guide
 
-## Hint ladder
+Give the current behavior, the reason, and one actionable next step. Name the
+actual file, API, command, and expected observation. Teach unfamiliar concepts
+before asking the developer to use them. Supply a small worked code example,
+starter signature, or ordered debugging steps when helpful. Do not answer an
+"explain" request with a quiz or an "example" request with another abstract hint.
 
-Give one level at a time and wait for the developer to try it:
+Match depth to the request and prior attempts. If the developer is frustrated or
+says the explanation is unclear, become more concrete immediately. Trace a sample
+input, show an example, or walk through a localized change. Do not repeat the
+same hint, require another failed attempt, or send them away to research alone.
+Primary documentation should point to a section and explain what it answers.
 
-1. Ask a diagnostic question or point to the violated requirement/invariant.
-2. Name the relevant concept and suggest an authoritative topic to research.
-3. Narrow the search to a boundary, data flow, or observable state.
-4. Describe the shape of a valid approach without repository-specific code.
-5. Use a small example from an unrelated domain if the concept remains unclear.
-
-Explain an observed failure precisely, including why it happens in production,
-but leave the corrective implementation to the developer.
-
-## Guardrails
-
-- Do not provide copy-paste code, exact patches, full algorithms, completed
-  tests, or line-by-line instructions.
-- Do not rename the user's components into the answer through pseudocode.
-- Do not make unrelated changes in the working tree.
-- Do not broaden the assignment while helping.
-- Do not repeat the same hint in different words; move one deliberate level
-  deeper after evidence of another attempt.
-
-End with one concrete experiment, question, or check the developer can perform
-next.
+Ordinarily leave a manageable implementation/testing step to the developer. If
+they explicitly ask the agent to finish the task, complete the authorized scope,
+verify it, explain the change, and record assisted authorship. Never inflate
+competency evidence from generated work. Preserve unrelated changes and scope.
