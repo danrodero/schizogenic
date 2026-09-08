@@ -2,42 +2,22 @@
 
 ## Outcome
 
-<!-- Describe observable behavior, not only files changed. -->
+<!-- In a few sentences: what changed and why? -->
 
 Closes #
 
-## Approach and trade-offs
-
-<!-- Explain your reasoning in your own words. Do not paste an agent answer. -->
-
 ## Verification
 
-<!-- List exact commands and any manual checks with their results. -->
+<!-- Exact commands and results. Mention any checks you could not run. -->
 
-```text
-command
-```
+## Help received and open questions
 
-## Tests
-
-<!-- What behavior and edge cases do the tests prove? -->
-
-## Documentation and operations
-
-<!-- Note docs, migrations, configuration, logging, or deployment impact. -->
-
-## Learning reflection
-
-- What was new?
-- What decision was hardest?
-- What would you investigate with more time?
+<!-- Briefly name coaching or agent-written contributions. Questions are welcome.
+No essay or formal learning reflection is required. -->
 
 ## Self-review
 
-- [ ] I implemented this work myself.
-- [ ] I wrote the initial tests myself.
-- [ ] The change matches the linked assignment and excludes unrelated work.
-- [ ] I ran every relevant formatter, static check, build, and test.
-- [ ] I considered failure paths, validation, security, and data integrity.
-- [ ] I updated relevant documentation.
-- [ ] I did not commit secrets, local state, or generated build output.
+- [ ] The change matches the agreed scope.
+- [ ] Relevant checks pass, or failures are described above.
+- [ ] Documentation matches the change where needed.
+- [ ] No secrets, personal database state, or generated outputs are included.

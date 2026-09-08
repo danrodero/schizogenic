@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        This issue defines an outcome and quality bar without prescribing the implementation.
+        This issue provides a short lesson, a starting point, and a concrete definition of done.
   - type: input
     id: requirements
     attributes:
@@ -25,14 +25,21 @@ body:
     id: learning
     attributes:
       label: Learning objectives
-      description: Skills this task practices and the reason they fit current evidence.
+      description: One main new concept, a short explanation, prerequisites/refresher, and why this fits current evidence.
+    validations:
+      required: true
+  - type: textarea
+    id: starting
+    attributes:
+      label: Starting point and steps
+      description: Existing file paths, relevant APIs, first action, and a short ordered checklist. Mark suggestions as suggestions.
     validations:
       required: true
   - type: textarea
     id: acceptance
     attributes:
       label: Acceptance criteria
-      description: Use externally observable criteria and include important failure behavior.
+      description: Concrete input/action and expected result examples, including the relevant failure.
       placeholder: |
         - Given ..., when ..., then ...
     validations:
@@ -41,21 +48,21 @@ body:
     id: quality
     attributes:
       label: Quality and verification obligations
-      description: Required test categories, checks, documentation, or operational evidence.
+      description: Name each required test scenario, exact commands, working directory, prerequisites, and expected results.
     validations:
       required: true
   - type: textarea
     id: constraints
     attributes:
       label: Constraints and out of scope
-      description: Boundaries that keep the assignment reviewable.
+      description: Explicit non-goals, optional work, expected files, and short PR submission instructions.
     validations:
       required: true
   - type: textarea
     id: references
     attributes:
       label: Primary references
-      description: Optional official documentation for research, without solution code.
+      description: One or two official links, with the section and the question it answers. Supplement the lesson.
   - type: checkboxes
     id: agreement
     attributes:
@@ -63,5 +70,5 @@ body:
       options:
         - label: The developer will implement the feature and its initial tests.
           required: true
-        - label: The agent will coach and review without supplying the solution.
+        - label: The agent will explain concepts, provide concrete examples, and help me finish the agreed scope.
           required: true

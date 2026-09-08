@@ -27,6 +27,8 @@ them into one undifferentiated data model.
 
 ## Learning vision
 
-The repository is successful only if the developer can explain, implement,
-test, operate, and defend its design. Passing review matters more than shipping
-quickly, and production standards apply from the first feature.
+The repository succeeds when the developer gradually learns to implement,
+test, explain, and operate useful software. The agent teaches the prerequisites,
+provides concrete guidance, and reviews work constructively. Small completed
+steps build confidence and skill; review protects correctness and helps the
+developer finish each step.

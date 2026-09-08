@@ -5,7 +5,10 @@ description: Review or re-review a Schizogenic pull request as a production lead
 
 # Review Learning PR
 
-Review the developer's work rigorously without taking over its implementation.
+Read `docs/learning/coaching-playbook.md` and follow its review contract.
+Review correctness while teaching a junior how to complete the agreed slice.
+If the user explicitly requests completion, implement and verify that scope;
+mark agent contributions honestly and preserve author/approver separation.
 
 ## Collect context
 
@@ -59,8 +62,9 @@ Review in this priority:
 5. Failure behavior, accessibility, observability, and operations.
 6. Maintainability, documentation, naming, and style.
 
-Ask for the developer's reasoning when a choice is not self-explanatory. Do not
-assume unfamiliarity merely because a choice differs from your preference.
+Ask about reasoning only when it affects a concrete review decision. Explain
+unfamiliar concepts directly; a missing explanation is not itself a merge blocker.
+Do not assume unfamiliarity merely because a choice differs from your preference.
 
 ## Write feedback
 
@@ -70,10 +74,15 @@ Leave durable, actionable findings on GitHub. For each finding:
 - Point to the smallest useful location.
 - Describe the observed behavior or risk.
 - Explain why it matters in production.
-- State the required outcome without supplying the implementation.
+- Give the expected result and an actionable next step, teaching the concept
+  and showing a small example if needed.
 
-Avoid flooding the PR with duplicate symptoms of one root cause. Separate
-required changes from optional coaching.
+Start with specific working behavior. Group all known required findings by root
+cause in one review. Only Blocker/Major findings with a demonstrated consequence
+or missing agreed behavioral evidence are required. Minor/Nit suggestions and
+ordinary Questions are non-blocking. No surprise standards: correct ambiguous
+issue wording, accept reasonable interpretations, and explain newly discovered
+risks. Do not block for prose, preferences, or unfamiliar vocabulary.
 
 ## Decide the review
 
@@ -114,8 +123,10 @@ Once the feature changes meet the approval bar:
    added, merge it first, then immediately prepare and complete an
    identity-safe fast-track PR for those records.
 
-Do not edit feature code or write replacement tests. Adversarial-test work must
-meet the exception in `AGENTS.md`.
+By default leave implementation and initial tests to the developer while giving
+concrete instruction. An explicit request to take over permits scoped completion
+and tests; record that contribution as assisted work. Otherwise adversarial-test
+work must meet the exception in `AGENTS.md`.
 
 ## Fast-track agent-authored policy changes
 
@@ -135,37 +146,18 @@ When preparing this kind of change before a PR exists, edit and validate it but
 leave it uncommitted for the developer if the current GitHub identity must
 approve the eventual PR.
 
-### Execute the identity-separated fast track
+### Identity availability
 
-For this repository, preserve the default Clawstopher reviewer environment and
-run developer operations through Dan's isolated configuration:
+Use only available, authorized GitHub identities. Historical account paths or
+keys in old instructions are not evidence that a developer login exists here.
+Inspect `gh api user`, CODEOWNERS, and active rules before publishing. If the
+available account is the sole required approver, prepare and validate the changes
+but leave them uncommitted for developer publication. Explain the exact GitHub
+constraint once, with a short ready-to-run handoff. Never change protections,
+forge authorship, or search for alternate credentials to force a merge.
 
-```bash
-env -u GH_TOKEN -u GITHUB_TOKEN \
-  GH_CONFIG_DIR="${HOME}/.config/gh-danrodero" \
-  gh auth status
-gh auth status
-```
-
-Both checks must name the intended, distinct accounts before continuing. Push
-the dedicated policy branch as Dan without rewriting `origin`, then create the
-pull request with Dan's isolated `gh` configuration:
-
-```bash
-branch="$(git branch --show-current)"
-git -c core.sshCommand="ssh -i ${HOME}/.ssh/danrodero -o IdentitiesOnly=yes" \
-  push -u origin "${branch}"
-env -u GH_TOKEN -u GITHUB_TOKEN \
-  GH_CONFIG_DIR="${HOME}/.config/gh-danrodero" \
-  gh pr create --base main --head "${branch}" --fill
-```
-
-Use normal `gh` commands as Clawstopher to re-read the exact remote head, diff,
-reviews, rules, threads, and checks and to re-run relevant local validation.
-Query `repos/danrodero/schizogenic/pulls/<pr>` with `gh api`; a non-null
-`stack` value selects the stack merge path. Submit approval only when no
-required finding remains. Immediately merge an ordinary pull request with
-`gh pr merge <pr> --squash`; merge a stacked pull request with
-`gh stack merge <pr> --yes --squash`. Query GitHub afterward to verify the
-merged commit and all affected pull requests and issues, fetch `origin/main`,
-and compare its exact landed commit.
+After developer publication, verify the exact remote head, author, diff, rules,
+review threads and checks. Query the pull request API's `stack` field. For an
+ordinary PR, approve then `gh pr merge <number> --squash`; for a stack, verify the
+entire prefix and use `gh stack merge <number> --yes --squash`. Verify merged
+state, landed commit, linked issues, and dependent layers afterward.

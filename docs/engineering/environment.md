@@ -25,7 +25,7 @@ not claim that target.
 | pnpm | 11.17.0 | JavaScript package manager |
 | PostgreSQL | 18.4 | Local database server and client |
 
-The backend currently pins Spring Boot 4.1.0 and a Gradle 9.5.1 wrapper. Use
+The backend currently pins Spring Boot 4.1.0 and a Gradle 9.6.1 wrapper. Use
 the committed wrapper for backend builds; the Nix-provided Gradle remains
 available for diagnostics and project bootstrapping.
 
