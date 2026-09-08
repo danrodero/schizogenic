@@ -57,6 +57,24 @@ Use the database recipes documented in the root README for local PostgreSQL.
 They place data in an ignored `.local` directory and configure trust
 authentication. Never reuse that configuration outside local development.
 
+## Git and GitHub identities
+
+The repository deliberately uses separate identities:
+
+- Human development sessions run as `louie`. Entering the Nix environment
+  removes inherited `GH_TOKEN` and `GITHUB_TOKEN` values, selects the existing
+  `~/.config/gh-danrodero` login, configures commits as Dan Rodero, and sets the
+  push URL to SSH.
+- Agent sessions run as `harness`. They retain the injected
+  `clawstopher-moltosanti` credentials for review and agent-owned maintenance.
+  Agent commits override the repository-local Git author explicitly and use the
+  configured GitHub ruleset bypass for their own pull requests.
+
+This keeps ordinary developer `git commit`, `git push`, and `gh` commands on the
+`danrodero` account inside the Nix environment. The agent never needs or uses
+the developer's GitHub configuration or SSH key. The developer never commits or
+publishes agent-authored files.
+
 ## Upgrade policy
 
 Upgrade tools through a focused maintenance issue and pull request:

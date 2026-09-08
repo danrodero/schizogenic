@@ -28,6 +28,15 @@ interactive shell remains Nushell. Validate unfamiliar Nushell syntax locally
 with `nu --no-config-file` before giving commands; do not execute publication
 operations merely to test syntax.
 
+The development shell separates human and agent GitHub identities. When the
+operating-system user is `louie`, it removes inherited reviewer-token overrides,
+selects the existing `~/.config/gh-danrodero` configuration, sets the repository
+Git author to Dan Rodero, and uses the SSH push URL. Agent processes run as
+`harness`, keep the injected `clawstopher-moltosanti` credentials, and must not
+read or use Dan's credentials. Before an agent-authored commit, pass the
+Clawstopher name and email explicitly with `git -c user.name=... -c user.email=...`;
+the repository-local default intentionally belongs to the developer.
+
 ## Non-negotiable boundaries
 
 - By default, the developer implements the assigned behavior and initial tests.
@@ -183,6 +192,10 @@ branch, open the pull request, and merge it using the agent's authenticated
 GitHub identity and configured ruleset bypass. Never ask the developer to commit,
 push, publish, approve, or merge agent-authored work. Leave the developer on a
 clean task branch from the updated `origin/main`.
+
+The developer commits and publishes only their own learning work. The agent's
+ruleset bypass exists specifically so agent-owned maintenance never needs the
+developer identity or a developer-authored commit.
 
 Do not require a learning PR to carry these changes or block it because this
 separate documentation branch is unmerged. If agent-added files or inherited

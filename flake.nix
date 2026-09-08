@@ -48,6 +48,20 @@
 
             shellHook = ''
               export SCHIZOGENIC_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+
+              # Human development shells use Dan's existing GitHub account and
+              # SSH transport. Agent processes run as harness and retain the
+              # injected Clawstopher credentials used for review and fast-track
+              # maintenance PRs.
+              if [ "$(id -un)" = "louie" ]; then
+                unset GH_TOKEN GITHUB_TOKEN
+                export GH_CONFIG_DIR="$HOME/.config/gh-danrodero"
+                git -C "$SCHIZOGENIC_ROOT" config --local user.name "Dan Rodero"
+                git -C "$SCHIZOGENIC_ROOT" config --local user.email "danrodero@outlook.com"
+                git -C "$SCHIZOGENIC_ROOT" remote set-url --push origin \
+                  git@github.com:danrodero/schizogenic.git
+              fi
+
               export PGDATA="$SCHIZOGENIC_ROOT/.local/state/postgres/data"
               export PGHOST="$SCHIZOGENIC_ROOT/.local/state/postgres/socket"
               export PGDATABASE="schizogenic_dev"

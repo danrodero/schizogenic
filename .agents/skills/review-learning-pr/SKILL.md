@@ -145,10 +145,13 @@ organization or optional cleanup.
 For a PR limited to repository policy, agent workflows, or learning-process
 documentation:
 
-1. Confirm the authenticated agent identity has ruleset bypass permission.
+1. Confirm the authenticated identity is `clawstopher-moltosanti` and has
+   ruleset bypass permission. Never use the developer's credentials.
 2. Inspect the complete diff and verify the exact head with every relevant
    documentation and skill validation.
-3. Commit, push, and open the PR with the agent identity.
+3. Commit with an explicit Clawstopher Git author, then push and open the PR
+   with the agent identity. The repository-local Git author defaults to Dan for
+   the developer's ordinary work.
 4. Re-read the remote diff and checks. Fast-track does not waive the production
    bar.
 5. If the change is correct, merge immediately using the configured bypass and
