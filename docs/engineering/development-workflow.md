@@ -131,6 +131,33 @@ still requires the agreed scope to be correct; explain a real blocker concretely
 Publication of agent housekeeping is not a new learning assignment and must not
 contaminate the developer's implementation branch.
 
+## Previously used developer login
+
+PR #10 documented a successful existing setup: the developer's `gh` login is
+under `$HOME/.config/gh-danrodero`, and Git publication used the existing SSH key
+`$HOME/.ssh/danrodero`. The default environment supplies the reviewer token.
+Reuse this documented setup before proposing a new login or configuration directory.
+
+Run this in the developer's own terminal to verify the existing login:
+
+```bash
+env -u GH_TOKEN -u GITHUB_TOKEN \
+  GH_CONFIG_DIR="$HOME/.config/gh-danrodero" \
+  gh auth status
+```
+
+The account must be `danrodero`. Use the same environment prefix for `gh pr
+create`; Git pushes can use the existing SSH setup independently. Give the
+actual branch and prepared PR body in each publication handoff.
+
+`$HOME` belongs to the process account. An agent running as `harness` checks
+`/home/harness`, not the human's home directory. Missing configuration there does
+not establish that the developer needs to authenticate again. If the agent
+cannot access the developer's configuration, say so and provide the existing
+command for their terminal. Do not read token files or search for alternate keys.
+
+Historical evidence: [PR #10](https://github.com/danrodero/schizogenic/pull/10).
+
 ## Tooling failures
 
 Give direct procedural help for environment and repository problems. Explain
