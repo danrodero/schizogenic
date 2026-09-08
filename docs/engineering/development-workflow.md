@@ -79,6 +79,19 @@ Approve only a ready prefix and merge it atomically with `gh stack merge`, never
 `gh pr merge` for a stack member. Verify every included PR/issue, landed commits,
 and remaining dependencies. Do not rewrite the developer's remaining branches.
 
+## Clean handoffs
+
+Before the developer starts another assignment, agent-owned edits must not remain
+as unexplained working-tree changes. When asked to commit them, use a separate
+local documentation branch based on current `origin/main` and the agent's commit
+identity; leave the developer on a clean task branch. This overrides the default
+uncommitted-record procedure. Publishing still requires valid GitHub identities.
+
+The documentation branch is not a prerequisite for the next learning PR. The
+agent owns separating or accounting for its changes and inherited commits. Review
+the actual diff against the correct base; do not reject developer work for the
+agent's leftovers, commit grouping, or optional cleanup.
+
 ## Policy-change fast track
 
 The agent may edit policy, workflow, and learning-process documents when asked.

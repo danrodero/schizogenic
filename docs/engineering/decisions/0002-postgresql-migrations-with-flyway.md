@@ -1,6 +1,6 @@
 # ADR 0002: PostgreSQL schema migrations with Flyway
 
-Status: Proposed
+Status: Accepted
 
 Date: 2026-08-10
 

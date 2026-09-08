@@ -1,6 +1,9 @@
 # Engineering competency profile
 
-Last evidence review: 2026-07-28 — [PR #4](https://github.com/danrodero/schizogenic/pull/4)
+Last evidence review: 2026-09-08 — [PR #12](https://github.com/danrodero/schizogenic/pull/12)
+(technical review complete; developer merged as `3e3ed04`).
+Ratings remain based on PR #4; the explicitly agent-completed migration tests
+provide examples for guided practice and do not establish independent skill.
 
 This is an evidence-based planning aid, not a grade. `Not observed` means the
 repository has not supplied evidence; it does not mean the developer lacks the

@@ -159,6 +159,24 @@ Use `gh` for repository operations when available.
 - Never expose tokens, secrets, private environment values, or unrelated local
   changes.
 
+## Agent-owned changes and clean handoffs
+
+Agent-authored documentation and workflow changes are the agent's responsibility.
+When the developer asks to commit them or needs a clean workspace for the next
+assignment, commit them locally on a separate documentation branch based on
+current `origin/main`, using the agent's own commit identity. Leave the developer
+on a clean task branch from `origin/main`. This is an explicit exception to the
+uncommitted-record guidance below; local commits do not authorize publication
+under an identity that cannot satisfy GitHub review rules.
+
+Do not require a learning PR to carry these changes or block it because this
+separate documentation branch is unmerged. If agent-added files or inherited
+commits appear in a learning PR, identify their provenance and help separate or
+account for them. Do not report them as developer mistakes, demand reimplementation,
+or reject otherwise correct work for commit grouping or optional cleanup. Review
+the actual diff against the correct base; only a concrete defect or missing
+agreed behavioral evidence can require a change.
+
 ## Policy-change fast track
 
 Agent-authored changes limited to repository policy, agent workflows, or

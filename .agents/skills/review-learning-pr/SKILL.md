@@ -128,6 +128,21 @@ concrete instruction. An explicit request to take over permits scoped completion
 and tests; record that contribution as assisted work. Otherwise adversarial-test
 work must meet the exception in `AGENTS.md`.
 
+## Own the agent's changes
+
+Apply `AGENTS.md`'s clean-handoff exception before the uncommitted guidance below.
+When asked to commit agent-owned records or clear the workspace, commit locally
+with the agent identity on a separate documentation branch from `origin/main`.
+Leave a clean implementation branch for the developer. GitHub publication and
+approval constraints still apply; do not open a self-approval deadlock.
+
+Do not block a learning PR because agent-owned documentation remains unmerged,
+agent edits are present, or inherited commits make the commit list look broad.
+Inspect the actual base-relative diff and provenance. Help separate agent work;
+do not turn your housekeeping into a required developer fix. Require changes
+only for a demonstrated defect or missing agreed behavioral evidence, not commit
+organization or optional cleanup.
+
 ## Fast-track agent-authored policy changes
 
 For a PR limited to repository policy, agent workflows, or learning-process
